@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Задание №2</title>
+    <link rel="stylesheet" href="styles2.css">
+<script type="text/javascript">
+  function nextSize(i, way, length) {
+    if (way == 1)
+      return 30 * Math.abs(Math.sin(i / (length / Math.PI)));
+    else
+      if (way == 2)
+        return 100 * Math.abs(Math.cos(i / (length / Math.PI)));
+  }
+  function sizeCycle(text, way, d) {
+    out = "";
+    for (i = 0; i < text.length; i++) {
+       size = parseInt(nextSize(i + d, way, text.length));
+       out += "<span style='font-size: "+ size +"pt'>" +text.substring(i, i + 1)+ "</span>";
+     }
+    document.getElementById("wave").innerHTML = out;
+  }
+  function doWave(text, n) {
+    sizeCycle(text, 1, n);
+    if (n > text.length) n = 0;
+    setTimeout("doWave(\"" + text + "\", " + (n + 1) + ")", 50);
+  }
+</script>
+</head>
+<body onload="doWave('в этом абзаце все слова разного размера', 1)">
+<a href="task_main.html">Вернуться к списку заданий</a>
+<p class="red">Это красный текст</p>
+<p class="red" style="color:red">Это тоже красный текст</p>
+<p class="bold">Это полужирный текст</p>
+<p class="bold">Это тоже полужирный текст</p>
+<p>Все элементы следующего списка (включая подсписок) имеют разные цвета и ни один из них не чёрный:</p>
+<ul>
+    <li style="color:green">Элемент списка</li>
+        <ol>
+            <li style="color:blue">Первый элемент подсписка</li>
+            <li style="color:red">Второй элемент подсписка</li>
+        </ol>
+    <li style="color:yellow">Ещё один элемент списка</li>
+</ul>
+<div id="wave"></div>
+<p><span class="xxsmall">В</span> <span font-size="xsmall">этом</span>
+    <span class="small">абзаце</span> <span class="medium">все</span> <span class=large>слова</span>
+    <span class="xlarge">разного</span> <span class="xxlarge">размера</span></p>
+<span id = 'dynamic-text'></span>
+</body>
+</html>
